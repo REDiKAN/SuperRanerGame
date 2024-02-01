@@ -1,7 +1,9 @@
 // передвежение игрока
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
+using DG.Tweening;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -13,7 +15,11 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] int maxJumpValue = 2; // максимальное Кол.во прыжков
     int jumpCount = 0; // реальное количество прыжков
 
-    [Header("Jerk")]
+    [Header("Dash")]
+    [Range(0, 3)] public int countDash;
+    public List<GameObject> dashList;
+    [SerializeField] float timeRecovery;
+
     [Tooltip("Сила рывка")]
     [SerializeField] int lungeInpulse = 5000;
     [SerializeField] KeyCode jerkClic;
@@ -29,7 +35,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] Animator anim;
 
     [Header("Parameters")]
-    [SerializeField] bool onGraund; // Если на земле
+    public bool onGraund; // Если на земле
     [SerializeField] Transform GraundCheck; // Обект проверяюший косается ли игрок земли 
     [SerializeField] float checkRadius = 0.5f; // радиус проверки земли
     [SerializeField] LayerMask Graund; // Слой земли
@@ -87,20 +93,25 @@ public class PlayerMove : MonoBehaviour
     {
         if (Input.GetKeyDown(jerkClic) && !lockLunge)
         {
-            lockLunge = true;
-            Invoke("LockLunge", 3);
-            rb.velocity = new Vector2(0, 0);
-            finish.nLunge += 1;
-            if (!faceRight)
+            if (countDash > 0)
             {
-                rb.AddForce(Vector2.left * lungeInpulse);
-            }
-            else
-            {
-                rb.AddForce(Vector2.right * lungeInpulse);
+                CountDashAnim();
+                lockLunge = true;
+                Invoke("LockLunge", 3);
+                rb.velocity = new Vector2(0, 0);
+                finish.nLunge += 1;
+                if (!faceRight) { rb.AddForce(Vector2.left * lungeInpulse); }
+                else { rb.AddForce(Vector2.right * lungeInpulse); }
             }
         }
     }// рывок
+
+    void CountDashAnim()
+    {
+        countDash--;
+        DOTween.Sequence()
+            .Append(dashList[countDash].transform.GetChild(0).GetComponent<Image>().DOFillAmount(0f, timeRecovery));
+    }
 
 
     void ChekingGround()

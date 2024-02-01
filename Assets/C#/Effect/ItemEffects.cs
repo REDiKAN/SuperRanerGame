@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "new ItemEffects", menuName = "item/create item")]
+[CreateAssetMenu(fileName = "new ItemEffects", menuName = "item/create effect")]
 public class ItemEffects : ScriptableObject
 {
     public string nameEffect;

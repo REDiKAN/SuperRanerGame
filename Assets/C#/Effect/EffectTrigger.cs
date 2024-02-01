@@ -4,7 +4,6 @@ using UnityEngine.UI;
 using UnityEngine;
 using DG.Tweening;
 
-
 public class EffectTrigger : MonoBehaviour
 {
     [SerializeField] ItemEffects itemEffects;
@@ -20,6 +19,7 @@ public class EffectTrigger : MonoBehaviour
             if (itemEffects.effectType == effectsType.upSpeed)
             {
                 StartCoroutine(ActivEffectSpeed(collision.GetComponent<PlayerMove>()));
+                gameObject.GetComponent<BoxCollider2D>().enabled = false;
             }
         }
     }
@@ -29,20 +29,20 @@ public class EffectTrigger : MonoBehaviour
         float contener = player.speed;
         player.speed += itemEffects.forceEffect;
         Debug.Log($"Ёффект {itemEffects.nameEffect} был подобран");
-        StavnUIPanel();
+        StartCoroutine(StavnUIPanel());
 
         yield return new WaitForSeconds(itemEffects.time);
 
         player.speed = contener;
         StopCoroutine(ActivEffectSpeed(player));
     }
-
-    void StavnUIPanel()
+    IEnumerator StavnUIPanel()
     {
         GameObject fullAmount = Instantiate(GM.iconEffect, GM.effectsPanel.transform.parent);
         fullAmount.transform.parent = GM.effectsPanel.transform;
         DOTween.Sequence()
             .Append(fullAmount.transform.GetChild(0).GetComponent<Image>().DOFillAmount(1f, itemEffects.time));
-
+        yield return new WaitForSeconds(itemEffects.time);
+        Destroy(fullAmount);
     }
 }
