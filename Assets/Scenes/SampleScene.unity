@@ -7578,7 +7578,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58f6f87640e354246a7e9d207c92d040, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  recoveryTime: 6
 --- !u!1 &751870133
 GameObject:
   m_ObjectHideFlags: 0
@@ -20346,8 +20345,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 117.375, y: 53.74292}
-  m_SizeDelta: {x: 234.7501, y: 107.4856}
+  m_AnchoredPosition: {x: 117.72, y: 53.74292}
+  m_SizeDelta: {x: 235.43, y: 107.4856}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1156019697
 MonoBehaviour:
@@ -20369,7 +20368,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '10.00
+  m_text: '10.000
 
 '
   m_isRightToLeft: 0
@@ -20434,7 +20433,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: -0.00005347838, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -21373,7 +21372,7 @@ MonoBehaviour:
   speed: 10
   jumpForce: 17200
   maxJumpValue: 2
-  countDash: 0
+  countDash: 3
   dashList:
   - {fileID: 269785173}
   - {fileID: 1032036687}
